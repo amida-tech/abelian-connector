@@ -1,0 +1,33 @@
+{
+  "name": "direct-api",
+  "version": "1.0.0",
+  "description": "API for sending/receiving Direct messages using Abelian",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^0.9.0",
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "form-data": "^0.2.0",
+    "mailcomposer": "^0.2.12",
+    "mailparser": "^0.4.8",
+    "moment": "^2.9.0",
+    "morgan": "^1.5.1",
+    "multer": "^0.1.7",
+    "multer-autoreap": "^0.0.8",
+    "node-uuid": "^1.4.2",
+    "path": "^0.11.14",
+    "request": "^2.51.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "supertest": "^0.15.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Dmitry Kachaev <dmitry.kachaev@gmail.com> (http://github.com/kachok)",
+  "license": "Apache-2.0"
+}

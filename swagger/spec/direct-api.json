@@ -1,0 +1,138 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Direct API",
+        "description": "Handles sending patient's health recoreds to doctors using Direct protocol"
+    },
+    "tags": [{
+        "name": "direct",
+        "description": "Direct (Abelian) integration APIs"
+    }],
+
+    "host": "localhost:3001",
+    "basePath": "/api/v1",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/send": {
+            "post": {
+                "summary": "Sends patient data (CCDA) to doctor using Direct protocol",
+                "description": "Sends patient data (CCDA) to doctor using Direct protocol",
+                "operationId": "send",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": ["direct"],
+                "parameters": [{
+                    "name": "to",
+                    "in": "formData",
+                    "type": "string",
+                    "description": "recepient Direct address",
+                    "required": true
+                }, {
+                    "name": "from",
+                    "in": "formData",
+                    "type": "string",
+                    "description": "sender Direct address",
+                    "required": true
+                }, {
+                    "name": "subject",
+                    "in": "formData",
+                    "type": "string",
+                    "description": "message subject",
+                    "required": true
+                }, {
+                    "name": "message",
+                    "in": "formData",
+                    "type": "string",
+                    "description": "message body",
+                    "required": true
+                }, {
+                    "name": "file",
+                    "in": "formData",
+                    "type": "file",
+                    "description": "CCDA/CMS health record",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "message successfully sent",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/inbox": {
+            "get": {
+                "summary": "Returns all Direct messages received by all users",
+                "description": "Returns all Direct messages received by all users",
+                "operationId": "inbox",
+                "tags": ["direct"],
+                "responses": {
+                    "200": {
+                        "description": "event history returned",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/messageSchema"
+                            },
+                            "minItems": 0
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+    },
+
+    "definitions": {
+        "inboxSchema": {
+            "type": "array",
+            "items": {
+                "$ref": "messageSchema"
+            },
+            "minItems": 0
+        },
+
+        "messageSchema": {
+            "properties": {
+                "sender": {
+                    "type": "string"
+                },
+                "recipient": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "message_id": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                },
+                "mdn_flag": {
+                    "type": "boolean"
+                },
+                "subject": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
